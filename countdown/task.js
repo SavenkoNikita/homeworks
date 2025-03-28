@@ -1,9 +1,18 @@
-const sec = document.getElementById('timer');
+const timerElement = document.getElementById('timer');
 
-const timer = setInterval(()=>{
-    sec.innerText--;
-    if (sec.innerText == 0) {
-        alert('Вы победили в конкурсе');
-        clearInterval(timer);
-    }
-}, 1000);
+if (timerElement) {
+    // Преобразуем начальное значение в число
+    let timeLeft = parseInt(timerElement.innerText, 10);
+    
+    const timer = setInterval(() => {
+        timeLeft--;
+        timerElement.innerText = timeLeft;
+        
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert('Вы победили в конкурсе!');
+        }
+    }, 1000);
+} else {
+    console.error('Элемент с id "timer" не найден');
+}
